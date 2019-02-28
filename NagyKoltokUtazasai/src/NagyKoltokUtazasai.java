@@ -16,7 +16,7 @@ public class NagyKoltokUtazasai {
 			List<String> splitted = Arrays.asList(line.split(":|;"));
 			String varos = splitted.get(0);
 			
-			List<String> szemelyek = splitted//.subList(1, splitted.size() - 1)
+			List<String> szemelyek = splitted
 					.stream()
 					.filter(szo -> !szo.equals(varos))
 					.map(jelenes -> jelenes.split(",")[0])
