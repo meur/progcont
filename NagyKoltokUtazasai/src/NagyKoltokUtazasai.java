@@ -16,7 +16,9 @@ public class NagyKoltokUtazasai {
 			List<String> splitted = Arrays.asList(line.split(":|;"));
 			String varos = splitted.get(0);
 			
-			List<String> szemelyek = splitted.subList(1, splitted.size() - 1).stream()
+			List<String> szemelyek = splitted//.subList(1, splitted.size() - 1)
+					.stream()
+					.filter(szo -> !szo.equals(varos))
 					.map(jelenes -> jelenes.split(",")[0])
 					.collect(Collectors.toList());			
 			szemelyek.forEach(szemely -> {
@@ -29,7 +31,7 @@ public class NagyKoltokUtazasai {
 		
 		jelenesek.forEach((key, value) -> {
 			System.out.println(key + " (" + value.size() + "):");
-			value.forEach(varos -> System.out.println(varos));
+			value.forEach(szemely -> System.out.println(szemely));
 		});
 	}
 
