@@ -15,8 +15,7 @@ public class Nevnapok {
 		}
 
 		while (olvas.hasNextLine()) {
-			String sor = olvas.nextLine();
-			String[] osztaly = sor.split(":");
+			String[] osztaly = olvas.nextLine().split(":");
 			osztalyok.put(osztaly[0], Arrays.asList(osztaly[1].split(",")));
 		}
 		olvas.close();
@@ -25,16 +24,14 @@ public class Nevnapok {
 			System.out.println(osztaly.getKey() + ":");
 			
 			nevnapok.entrySet().stream()
-				.map(nap -> {
-					return new AbstractMap.SimpleEntry<Integer, List<String>>(
+				.map(nap -> new AbstractMap.SimpleEntry<Integer, List<String>>(
 						nap.getKey(),
 						osztaly.getValue().stream()
 							.filter(nev -> {
 								return nap.getValue().contains(nev.split(" ")[1]);
 							})
 							.sorted()
-							.collect(Collectors.toList()));
-				})
+							.collect(Collectors.toList())))
 				.filter(nap -> !nap.getValue().isEmpty())
 				.forEach(nap -> {
 					System.out.print(nap.getKey() + ":");
