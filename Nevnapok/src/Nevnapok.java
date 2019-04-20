@@ -26,15 +26,14 @@ public class Nevnapok {
 			
 			nevnapok.entrySet().stream()
 				.map(nap -> {
-					Map.Entry<Integer, List<String>> eredmeny = new AbstractMap.SimpleEntry<Integer, List<String>>(
-							nap.getKey(),
-							osztaly.getValue().stream()
-								.filter(nev -> {
-									return nap.getValue().contains(nev.split(" ")[1]);
-								})
-								.sorted()
-								.collect(Collectors.toList()));
-					return eredmeny;
+					return new AbstractMap.SimpleEntry<Integer, List<String>>(
+						nap.getKey(),
+						osztaly.getValue().stream()
+							.filter(nev -> {
+								return nap.getValue().contains(nev.split(" ")[1]);
+							})
+							.sorted()
+							.collect(Collectors.toList()));
 				})
 				.filter(nap -> !nap.getValue().isEmpty())
 				.forEach(nap -> {
